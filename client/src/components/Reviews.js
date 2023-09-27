@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 
-
 function Reviews({ reviews, bathroom, user }) {
-
-  let initialState= {content: '' , 
-  bathroom_id: bathroom.id,
-  user_id: user.id}
+  let initialState = {
+    content: '',
+    bathroom_id: bathroom ? bathroom.id : null, // Check if bathroom is null
+    user_id: user ? user.id : null, // Check if user is null
+  };
 
   const [newReview, setNewReview] = useState(initialState);
+  const [allReviews, setAllReviews] = useState(reviews);
 
-   const [allReviews, setAllReviews] = useState(reviews)
-
-  
-  function updatedReviews(str){
-    let updateReviews = [...allReviews, str]
-    setAllReviews(updateReviews)
+  function updatedReviews(str) {
+    let updatedReviews = [...allReviews, str];
+    setAllReviews(updatedReviews);
   }
 
   const handleInputChange = (e) => {
@@ -35,8 +33,8 @@ function Reviews({ reviews, bathroom, user }) {
         return response.json();
       })
       .then((data) => {
-        updatedReviews(data)
-        setNewReview(initialState)
+        updatedReviews(data);
+        setNewReview(initialState);
       })
       .catch((error) => {
         console.error("Fetch error:", error);
@@ -52,7 +50,8 @@ function Reviews({ reviews, bathroom, user }) {
         onChange={handleInputChange}
         placeholder="Write your review here"
       ></textarea>
-      <button onClick={handleSubmit} className='btn-primary'>
+      <br/>
+      <button onClick={handleSubmit} className="btn-primary">
         Create a Review
       </button>
       <ul>
@@ -65,6 +64,7 @@ function Reviews({ reviews, bathroom, user }) {
 }
 
 export default Reviews;
+
 
 
 

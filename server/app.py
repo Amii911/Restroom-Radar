@@ -115,7 +115,7 @@ class BathroomResource(Resource):
         db.session.delete(bathrooms)
         db.session.commit()
 
-        return make_response({'message': 'Bathroom deleted successfully'}, 200)
+        return make_response({'message': 'Bathroom deleted successfully'}, 204 )
     
     def patch(self, id):
         bathrooms= Bathroom.query.filter_by(id=id).first()

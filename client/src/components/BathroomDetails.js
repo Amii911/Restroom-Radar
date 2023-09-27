@@ -1,35 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import Reviews from './Reviews';
+import EditBathroom from './EditBathroom';
 
-const BathroomDetails = ({ data, currentUser }) => {
-  // const [currentBathroom, setCurrentBathroom] = useState({})
-  // Get the 'id' parameter from the URL using useParams
+const BathroomDetails = ({ currentUser }) => {
+  const navigate = useNavigate()
   const { id } = useParams();
+  const [bathroom, setBathroom] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
-  //to find and store a specific bathroom where the id matches
-  const bathroom = data.find((bathroom) => bathroom.id === parseInt(id));
-  console.log(id)
+  useEffect(() => {
+    fetch(`/bathrooms/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setBathroom(data);
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error);
+      });
+  }, [id]);
 
-  // useEffect(() => {
-  //   fetch("/bathrooms/")
-  //   .then(resp => resp.json())
-  //   .then(data=> setCurrentBathroom(data))
-  // }, [])
-
-  console.log(bathroom)
+  const handleEditBathroomClick = () => {
+    // Navigate to the EditBathroom route when the button is clicked
+    navigate(`/bathrooms/${id}/edit`);
+  };
+  const handleUpdate = (updatedBathroom) => {
+    setBathroom(updatedBathroom);
+    setIsEditing(false);
+    navigate(`/bathrooms`);
+  };
 
   return (
-    <div className="blog-details">
+    <div className="bathroom-details">
       {!bathroom && <div>Loading...</div>}
       {bathroom && (
-        <article>
-          <h1>{bathroom.bathroom_name}</h1>
-          <p>{bathroom.street_name}</p>
-          <p>{bathroom.city} {bathroom.zip_code}</p>
-          <hr/>
-          <Reviews reviews={bathroom.reviews} bathroom={bathroom} user={currentUser}/>
-        </article>
+        <div>
+          <h2>{bathroom.bathroom_name}</h2>
+          {isEditing ? (
+            <EditBathroom bathroom={bathroom} handleUpdate={handleUpdate} />
+          ) : (
+            <div>
+              <p>Address: {bathroom.street_num} {bathroom.street_name}</p>
+              <p>City: {bathroom.city}</p>
+              <p>Zip Code: {bathroom.zip_code}</p>
+              <hr />
+              <Reviews reviews={bathroom.reviews} bathroom={bathroom} user={currentUser} />
+              <button onClick={handleEditBathroomClick}>Edit Bathroom</button>
+              <Link to="/">Back to Home</Link>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

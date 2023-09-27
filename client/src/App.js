@@ -7,7 +7,7 @@ import NavBar from './components/NavBar';
 import BathroomDetails from "./components/BathroomDetails";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-// import EditBathroom from "./components/EditBathroom";
+import EditBathroom from "./components/EditBathroom";
 
 function App() {
   const [data, setData] = useState([])
@@ -71,7 +71,7 @@ function App() {
         <Route path="/signup" element={<Signup login={login}/>} />
         <Route path="/login" element={<Login login={login} />} />
         <Route path="/add-bathroom" element={<CreateBathroom handleAddBathroom={handleAddBathroom}/>} />
-        {/* <Route path="/edit-bathroom" element={<EditBathroom/>} /> */}
+        <Route path="/bathrooms/:id/edit" element={<EditBathroom />} />
         <Route path="/bathrooms/:id" element={<BathroomDetails data={data} currentUser={currentUser}/>} />
       </Routes>
     </Router>
@@ -79,7 +79,6 @@ function App() {
 }
 
 export default App;
-
 
 
 
