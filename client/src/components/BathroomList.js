@@ -11,7 +11,7 @@ function BathroomList({ bathrooms, handleDeleteBathroom }) {
     })
       .then((id) => {
         handleDeleteBathroom(id);
-        navigate('/bathrooms');
+        navigate('/');
       })
       .catch((error) => {
         console.error('Error deleting bathroom:', error);
