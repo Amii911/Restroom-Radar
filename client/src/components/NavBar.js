@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 
-function NavBar({loggedIn, setCurrentUser, setLoggedIn}) {
+function NavBar({loggedIn, setCurrentUser, setLoggedIn, currentUser}) {
 
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function NavBar({loggedIn, setCurrentUser, setLoggedIn}) {
   
   return (
     <nav className='navbar'>
-      <h1>WELCOME TO RESTROOM RADAR NYC</h1>
+      <h1>WELCOME {currentUser.username} TO RESTROOM RADAR NYC</h1>
       {displayedLinks}
     </nav>
   );

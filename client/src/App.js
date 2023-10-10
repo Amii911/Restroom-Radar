@@ -64,7 +64,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
+      <NavBar setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} loggedIn={loggedIn} currentUser={currentUser}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/bathrooms" element={<Bathrooms data={data} handleDeleteBathroom={handleDeleteBathroom} handleEditBathroom={handleEditBathroom}/>} />

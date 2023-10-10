@@ -5,27 +5,25 @@
 
 ## How To Use
 
-- Restroom Radar NYC is a React-Flask fullstack application that allows users to read, create, update, and delete reviews for bathrooms across NYC. 
-- Use Search bar to find a restroom near you based on zipcode.
-
----
-
-## Walkthrough
-
-- IMAGE
+- Restroom Radar NYC is a React-Flask fullstack application that allows users to read, create, update, and delete bathrooms across NYC. 
+- You must create a user name and a password in order to log in. 
+- You can select a bathroom to see the details of the bathroom and the reviews.
+- You can create and read reviews. 
 
 ---
 
 ## Installation
 
-- For local installation, fork and clone this repository, then cd into your project folder and run the following commands:
+- For local installation, fork and clone this repository, then navigate into your project folder and run the following commands:
 
-- need to install server
+- Install the server-side dependencies using pipenv install and activate the virtual environment using pipenv shell
+    - run `python app.py` for port 5555
 
-- need to install client
-
-Hosts used. 
+- In another terminal, navigate to the project directory and then into the client directory
+    - run `npm install`
+    - run `npm start`
 
 ---
 
 ## Resources
+No contributing at this time. For questions, please reach out to restroomradar@gmail.com
