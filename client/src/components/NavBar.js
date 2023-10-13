@@ -32,7 +32,7 @@ function NavBar({loggedIn, setCurrentUser, setLoggedIn, currentUser}) {
   
   return (
     <nav className='navbar'>
-      <h1>WELCOME {currentUser.username} TO RESTROOM RADAR NYC</h1>
+      <h1>WELCOME  {currentUser ? currentUser.username : 'GUEST'} TO RESTROOM RADAR NYC</h1>
       {displayedLinks}
     </nav>
   );
